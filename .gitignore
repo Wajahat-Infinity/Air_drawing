@@ -1,0 +1,38 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.db
+*.sqlite3
+
+# Virtual Environment
+venv/
+env/
+.myenv/
+
+# IDE
+.vscode/
+.idea/
+
+# MediaPipe and OpenCV cache
+*.mp4
+*.avi
+*.jpg
+*.png
+
+# Flask
+instance/
+*.log
+*.pot
+*.pyc
+*.pyo
+*.pyd
+*.db
+*.sqlite3
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
