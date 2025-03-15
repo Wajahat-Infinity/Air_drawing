@@ -25,4 +25,4 @@ Welcome to the **Air Drawing Application**! This project allows you to draw in m
 ### Installation
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/your-repo-name.git
+   https://github.com/Wajahat-Infinity/Air_drawing.git
