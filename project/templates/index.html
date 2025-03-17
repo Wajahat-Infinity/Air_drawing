@@ -7,39 +7,60 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <h1>Air Drawing</h1>
-    <div>
+    <h1>Air Drawing Application</h1>
+    <div class="video-container">
         <img src="{{ url_for('video_feed') }}" alt="Video Feed">
     </div>
+    <div class="selected-color-display">
+        Selected Color: <span id="selected-color">Green</span>
+    </div>
     <div class="controls">
-        <button onclick="setColor('red')">Red</button>
-        <button onclick="setColor('green')">Green</button>
-        <button onclick="setColor('blue')">Blue</button>
         <button onclick="clearCanvas()">Clear Canvas</button>
         <button onclick="toggleDirection()">Toggle Direction (LTR/RTL)</button>
     </div>
+    <footer>
+        Made with ❤️ by <a href="https://github.com/Wajahat-Infinity" target="_blank">Wajahat</a>
+    </footer>
 
     <script>
         let currentDirection = "ltr";
 
-        function setColor(color) {
-            fetch(`/set_color/${color}`)
-                .then(response => response.text())
-                .then(data => console.log(data));
-        }
-
+        // Function to clear the canvas
         function clearCanvas() {
             fetch('/clear_canvas')
                 .then(response => response.text())
                 .then(data => console.log(data));
         }
 
+        // Function to toggle the writing direction
         function toggleDirection() {
             currentDirection = currentDirection === "ltr" ? "rtl" : "ltr";
             fetch(`/set_direction/${currentDirection}`)
                 .then(response => response.text())
                 .then(data => console.log(data));
         }
+
+        // Function to update the selected color display
+        function updateSelectedColor(color) {
+            const selectedColorElement = document.getElementById('selected-color');
+            selectedColorElement.textContent = color;
+            selectedColorElement.style.color = color;
+        }
+
+        // Function to fetch the selected color from the backend
+        function fetchSelectedColor() {
+            fetch('/get_selected_color')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.color) {
+                        updateSelectedColor(data.color);
+                    }
+                })
+                .catch(error => console.error('Error fetching selected color:', error));
+        }
+
+        // Periodically fetch the selected color (e.g., every 500ms)
+        setInterval(fetchSelectedColor, 500);
     </script>
 </body>
 </html>
